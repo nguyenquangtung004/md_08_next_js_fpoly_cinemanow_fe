@@ -6,13 +6,17 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Eye, EyeOff } from "lucide-react";
 
+// FUNCTIONALITY: Component form đăng nhập với validation và UI/UX tối ưu
 export default function LoginForm() {
+  // NOTE: State management cho form data
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -21,93 +25,167 @@ export default function LoginForm() {
   const [message, setMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  // FUNCTIONALITY: Xử lý submit form với validation
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    
+    // TODO: Thêm validation chi tiết cho email và password
+    if (!email.trim() || !password.trim()) {
+      setError("Vui lòng nhập đầy đủ thông tin");
+      return;
+    }
+
     setLoading(true);
+    setError("");
     setSuccess(false);
     setMessage("Đang xử lý đăng nhập...");
-    console.log("Đăng nhập với email:", email, "và mật khẩu", password);
-    //Call api ở đây
-
+    
+    // DEBUG: Log thông tin đăng nhập (chỉ để development)
+    console.log("Đăng nhập với email:", email);
+    
+    // TODO: Thay thế setTimeout bằng actual API call
     try {
-      setTimeout(() => {
-        setLoading(false);
-        setSuccess(true);
-        setMessage("Đăng nhập thành công!");
-      }, 2000);
-    } catch (Exception) {
-      console.error("Lỗi đăng nhập:", Exception);
-      
+      // HACK: Sử dụng setTimeout để simulate API call - cần thay thế bằng real API
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          setLoading(false);
+          setSuccess(true);
+          setMessage("Đăng nhập thành công!");
+          resolve(true);
+        }, 2000);
+      });
+    } catch (exception) {
+      // FIXME: Cần xử lý các loại error khác nhau từ API
+      console.error("Lỗi đăng nhập:", exception);
+      setLoading(false);
       setError("Đăng nhập không thành công. Vui lòng thử lại.");
+      setMessage("");
     }
   };
+
+  // UI/UX: Toggle hiển thị/ẩn password
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
+  // FUNCTIONALITY: Reset error message khi user thay đổi input
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    if (error) setError("");
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+    if (error) setError("");
+  };
+
   return (
-    <Card className="w-full max-x-sm">
-      <CardHeader>Đăng nhập</CardHeader>
-      <CardDescription>
-        Chào mừng trở lại! Vui lòng đăng nhập để tiếp tục.
-      </CardDescription>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <Card className="w-full max-w-md mx-auto shadow-lg border-0 bg-white">
+        {/* UI/UX: Header section với title và description */}
+        <CardHeader className="space-y-1 text-center pb-6">
+          <CardTitle className="text-2xl font-bold text-gray-900">
+            Đăng nhập
+          </CardTitle>
+          <CardDescription className="text-gray-600">
+            Chào mừng trở lại! Vui lòng đăng nhập để tiếp tục.
+          </CardDescription>
+        </CardHeader>
 
-      <form onSubmit={handleLogin}>
-        <CardContent className="grid gap-4">
-            {message && !error &&(
-                <div className="p3 rounded-md text-sm ${success ? 'bg-green-100 text-green-700'} :  'bg-blue-100 text-blue-700'}`">
-                    {message}
-                    {success}
-                </div>
-            ) }
-
-              {error && (
-            <div className="p-3 rounded-md bg-red-100 text-red-700 text-sm">
-              {error}
+        {/* FUNCTIONALITY: Form chính với validation */}
+        <form onSubmit={handleLogin}>
+          <CardContent className="space-y-4">
+            {/* NOTE: Email input field */}
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-sm font-medium text-gray-700">
+                Email
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="Nhập email của bạn"
+                value={email}
+                required
+                onChange={handleEmailChange}
+                disabled={loading}
+                className="h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+              />
             </div>
-          )}
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="Nhập email của bạn"
-              value={email}
-              required
-              onChange={(e) => setEmail(e.target.value)}
-              disabled={loading}
-            >
-            </Input>
 
-            <div className="relative">
-                <div className="grid gap-2">
-                type={showPassword ? "text" : "password"}
-                <Label htmlFor="password">Mật khẩu</Label>
+            {/* NOTE: Password input field với toggle show/hide */}
+            <div className="space-y-2">
+              <Label htmlFor="password" className="text-sm font-medium text-gray-700">
+                Mật khẩu
+              </Label>
+              <div className="relative">
                 <Input
                   id="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="••••••••"
                   required
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={handlePasswordChange}
                   disabled={loading}
+                  className="h-11 pr-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                 />
-                <button
+                {/* UI/UX: Toggle button để show/hide password */}
+                <Button
                   type="button"
+                  variant="ghost"
+                  size="sm"
                   onClick={toggleShowPassword}
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm text-gray-500 hover:text-gray-700"/>
-                  {showPassword ? "Ẩn" : "Hiện"}
+                  disabled={loading}
+                  className="absolute right-0 top-0 h-11 px-3 py-2 hover:bg-transparent"
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-4 w-4 text-gray-400" />
+                  ) : (
+                    <Eye className="h-4 w-4 text-gray-400" />
+                  )}
+                </Button>
               </div>
-                </div>
-          </div>
+            </div>
 
-          <CardFooter>
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Đang xử lý..." : "Đăng nhập"}
+            {/* UI/UX: Message display area */}
+            {message && !error && (
+              <div
+                className={`p-3 rounded-md text-sm ${
+                  success
+                    ? "bg-green-50 text-green-700 border border-green-200"
+                    : "bg-blue-50 text-blue-700 border border-blue-200"
+                }`}
+              >
+                {message}
+              </div>
+            )}
+
+            {/* UI/UX: Error message display */}
+            {error && (
+              <div className="p-3 rounded-md bg-red-50 text-red-700 text-sm border border-red-200">
+                {error}
+              </div>
+            )}
+          </CardContent>
+
+          {/* FUNCTIONALITY: Submit button */}
+          <CardFooter className="pt-4">
+            <Button
+              type="submit"
+              className="w-full h-11 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 disabled:opacity-50"
+              disabled={loading}
+            >
+              {loading ? (
+                <div className="flex items-center space-x-2">
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <span>Đang xử lý...</span>
+                </div>
+              ) : (
+                "Đăng nhập"
+              )}
             </Button>
           </CardFooter>
-        </CardContent>
-      </form>
-    </Card>
+        </form>
+      </Card>
+    </div>
   );
 }
