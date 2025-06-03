@@ -80,9 +80,8 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-400 py-12 px-4 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md mx-auto shadow-lg border-0 bg-white">
-        {/* UI/UX: Header section với title và description */}
         <CardHeader className="space-y-1 text-center pb-6">
           <CardTitle className="text-2xl font-bold text-gray-900">
             Đăng nhập
@@ -144,6 +143,9 @@ export default function LoginForm() {
                   )}
                 </Button>
               </div>
+            </div>
+
+            <div>
             </div>
 
             {/* UI/UX: Message display area */}
