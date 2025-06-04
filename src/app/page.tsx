@@ -1,12 +1,13 @@
-"use client";
+// "use client";
 // import LoginScrenn from "@/app/screen/login";
-import AppError from "@/app/error";
-// import Loading from "@/app/loading";
+// import AppError from "@/app/error";
+import Loading from "@/app/loading";
 export default function Home() {
   return (
     <div>
+
      {/* <LoginScrenn></LoginScrenn> */}
-     {/* <Loading></Loading> */}
+     <Loading></Loading>
      {/* <AppError 
         error={new globalThis.Error("Đây là lỗi test")} 
         reset={() => {
@@ -16,9 +17,9 @@ export default function Home() {
         }} 
       /> */}
 
-      <AppError error={new Error("Test error")} reset={function (): void {
+      {/* <AppError error={new Error("Test error")} reset={function (): void {
         throw new Error("Function not implemented.");
-      } }></AppError>
+      } }></AppError> */}
     </div>
   );
 }
