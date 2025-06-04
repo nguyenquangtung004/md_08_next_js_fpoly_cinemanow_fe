@@ -3,7 +3,7 @@
 import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { SidebarTrigger } from "@/components/ui/sidebar"
-import { NotificationDropdown } from "@/components/screen/notification/notification-dropdown"
+import { NotificationDropdown } from "@/components/screen/home/notification/notification-dropdown"
 
 export function DashboardHeader() {
   return (

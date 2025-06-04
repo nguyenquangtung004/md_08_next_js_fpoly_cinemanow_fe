@@ -4,9 +4,9 @@ import { useState, useMemo } from "react"
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/screen/home/dashboard/components/app_sidebar"
 import { DashboardHeader } from "@/components/screen/home/dashboard/components/dash_board_header"
-import { NotificationsHeader } from "@/components/screen/notification/notifications-header"
-import { NotificationsTable } from "@/components/screen/notification/notifications-table"
-import { NotificationDialog } from "@/components/screen/notification/notification-dialog"
+import { NotificationsHeader } from "@/components/screen/home/notification/notifications-header"
+import { NotificationsTable } from "@/components/screen/home/notification/notifications-table"
+import { NotificationDialog } from "@/components/screen/home/notification/notification-dialog"
 
 // Notification type definition
 type Notification = {
