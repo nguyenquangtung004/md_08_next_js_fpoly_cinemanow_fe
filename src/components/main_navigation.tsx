@@ -75,6 +75,24 @@ function Navigation() {
           >
             Dashboard
           </Link>
+
+            <Link 
+            href="/dashboard"
+            className={`hover:text-gray-300 transition-colors ${
+              pathname === '/dashboard' ? 'text-blue-400 font-semibold' : ''
+            }`}
+          >
+            Dashboard
+          </Link>
+
+          <Link
+           href="/page/notification"
+            className={`hover:text-gray-300 transition-colors ${
+              pathname === '/page/notification' ? 'text-blue-400 font-semibold' : ''
+            }`}
+          >
+          
+          </Link>
         </div>
 
         {/* UI/UX: Action buttons */}
@@ -121,7 +139,7 @@ export default function Home() {
               {/* NOTE: Dashboard header */}
               <div>
                 <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-                <p className="text-muted-foreground">Tổng quan hệ thống đặt vé xem phim</p>
+                <p className="text-muted-foreground">Tổng quan hệ thống đặt véx xem phim</p>
               </div>
 
               {/* PERFORMANCE: Stats cards component */}

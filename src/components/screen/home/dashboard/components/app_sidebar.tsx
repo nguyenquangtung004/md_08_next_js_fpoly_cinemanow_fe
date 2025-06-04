@@ -1,6 +1,6 @@
 "use client"
 
-import { Calendar, Film, Home, Settings, Ticket, Users, BarChart3, MapPin } from "lucide-react"
+import { Calendar, Film, Home, Settings, Ticket, Users, BarChart3, MapPin, Bell } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
@@ -36,6 +36,12 @@ const menuItems = [
     url: "#",
     icon: Users,
   },
+  {
+    title:"Thông báo",
+    url: "/page/notification",
+    icon: Bell, // Assuming you have a bell icon imported
+  },
+
   {
     title: "Rạp chiếu",
     url: "#",
