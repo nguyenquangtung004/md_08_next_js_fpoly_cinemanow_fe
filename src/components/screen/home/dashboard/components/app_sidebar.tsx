@@ -23,7 +23,7 @@ const menuItems = [
   },
   {
     title: "Phim",
-    url: "/page/add-film",
+    url: "page/add-film",
     icon: Film,
   },
   {
