@@ -93,6 +93,15 @@ function Navigation() {
           >
           
           </Link>
+
+           <Link
+           href="/page/settings"
+            className={`hover:text-gray-300 transition-colors ${
+              pathname === '/page/settings' ? 'text-blue-400 font-semibold' : ''
+            }`}
+          >
+          
+          </Link>
         </div>
 
         {/* UI/UX: Action buttons */}

@@ -23,7 +23,7 @@ const menuItems = [
   },
   {
     title: "Phim",
-    url: "page/add-film",
+    url: "/page/add-film",
     icon: Film,
   },
   {
@@ -59,7 +59,7 @@ const menuItems = [
   },
   {
     title: "Cài đặt",
-    url: "#",
+    url: "/page/settings",
     icon: Settings,
   },
 ]
